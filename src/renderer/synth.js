@@ -174,7 +174,7 @@ class Synth {
         voice.note = notes[Math.floor((notes.length - 7) * control.value)];
         break;
       case 'Gain':
-        voice.gain = control.value;
+        channel.gain = control.value;
         break;
       case 'HiPass':
         channel.filters[0].frequency.cancelScheduledValues(0);

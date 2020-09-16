@@ -2,6 +2,7 @@ class Voice {
   constructor({ context, waves }) {
     this.context = context;
     this.output = context.createGain();
+    this.output.gain.setValueAtTime(1, context.currentTime);
 
     this.oscillators = waves.map(({ type, offset }) => {
       const gain = context.createGain();
@@ -15,26 +16,7 @@ class Voice {
       return oscillator;
     });
 
-    this.gain = 1;
     this.note = 0;
-  }
-
-
-  get gain() {
-    return this._gain;
-  }
-
-  set gain(value) {
-    const { context, output: { gain } } = this;
-    if (this._gain === value) {
-      return;
-    }
-    this._gain = value;
-    gain.cancelScheduledValues(0);
-    gain.linearRampToValueAtTime(
-      value,
-      context.currentTime + 0.01
-    );
   }
 
   get note() {
