@@ -4,7 +4,7 @@ class Visualizer {
     const canvas = document.createElement('canvas');
     canvas.style.marginBottom = '0.25rem';
     canvas.width = 250;
-    canvas.height = 75;
+    canvas.height = 90;
     dom.appendChild(canvas);
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
@@ -27,7 +27,7 @@ class Visualizer {
     let x = 0;
 
     ctx.beginPath();
-    for(var i = 0; i < len; i += 1, x += sliceWidth) {
+    for (var i = 0; i < len; i += 1, x += sliceWidth) {
       const v = analyser.buffer[i] / 128.0;
       const y = v * canvas.height / 2;
       if(i === 0) {

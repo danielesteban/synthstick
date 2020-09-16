@@ -15,7 +15,7 @@ class Voice {
       return oscillator;
     });
 
-    this.gain = 0;
+    this.gain = 1;
     this.note = 0;
   }
 
