@@ -24,10 +24,9 @@ class Visualizer {
 
     const len = analyser.buffer.length;
     const sliceWidth = canvas.width * 1.0 / len;
-    let x = 0;
 
     ctx.beginPath();
-    for (var i = 0; i < len; i += 1, x += sliceWidth) {
+    for (let i = 0, x = 0; i < len; i += 1, x += sliceWidth) {
       const v = analyser.buffer[i] / 128.0;
       const y = v * canvas.height / 2;
       if(i === 0) {
