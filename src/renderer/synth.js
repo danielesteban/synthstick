@@ -7,8 +7,8 @@ class Synth {
     this.channel = new Channel({
       context,
       filters: [
-        { type: 'highpass', frequency: 1024 },
-        { type: 'distortion', amount: 512 },
+        { type: 'highpass', frequency: 512 },
+        { type: 'distortion', amount: 1024 },
       ],
       gain: 1,
       muted: true,
