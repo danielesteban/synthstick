@@ -52,25 +52,34 @@ class Synth {
       label.appendChild(bar);
       const state = {
         bar,
-        centered: false,
-        enabled: false,
-        inverted: false,
+        mapping: localStorage.getItem(`synthstick:mapping:${id}`) || undefined,
+        centered: localStorage.getItem(`synthstick:modifier:${id}:centered`) || false,
+        enabled: localStorage.getItem(`synthstick:modifier:${id}:enabled`) || false,
+        inverted: localStorage.getItem(`synthstick:modifier:${id}:inverted`) || false,
         value: 0,
       };
+      if (state.mapping) {
+        this.mappings.set(state.mapping, id);
+      }
       this.controls[id] = state;
-      ['enabled', 'centered', 'inverted'].forEach((id) => {
+      ['enabled', 'centered', 'inverted'].forEach((modifier) => {
         const button = document.createElement('button');
-        button.style.background = state[id] ? '#393' : '#333';
+        button.style.background = state[modifier] ? '#393' : '#333';
         button.style.width = '20px';
         button.style.border = '1px solid #000';
         button.style.color = '#eee';
         button.style.fontFamily = 'inherit';
         button.style.padding = '0';
         button.style.outline = 'none';
-        button.innerText = id.substr(0, 1).toUpperCase();
+        button.innerText = modifier.substr(0, 1).toUpperCase();
         button.addEventListener('click', () => {
-          state[id] = !state[id];
-          button.style.background = state[id] ? '#393' : '#333';
+          state[modifier] = !state[modifier];
+          button.style.background = state[modifier] ? '#393' : '#333';
+          if (state[modifier]) {
+            localStorage.setItem(`synthstick:modifier:${id}:${modifier}`, true);
+          } else {
+            localStorage.removeItem(`synthstick:modifier:${id}:${modifier}`);
+          }
         });
         control.appendChild(button);
       });
@@ -91,6 +100,7 @@ class Synth {
           }
           state.mapping = `${type}:${gamepad}:${index}`;
           this.mappings.set(state.mapping, id);
+          localStorage.setItem(`synthstick:mapping:${id}`, state.mapping);
         });
       });
       control.appendChild(map);
