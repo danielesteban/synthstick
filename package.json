@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "build": "electron-webpack",
-    "package": "npm run build && electron-builder",
+    "package": "npm run build && electron-builder -p never",
     "start": "electron-webpack dev"
   },
   "dependencies": {
