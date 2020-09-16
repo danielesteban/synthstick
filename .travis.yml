@@ -7,7 +7,7 @@ deploy:
   provider: releases
   api_key:
     secure: q5Qx7VA2lkPj7WrwDpqfvsvItCiS6CUdhHWPA9Tt3D9cIRW9WgpcSVyoCg3RUXcH9r5Kz/Pr0H6ImAq4eIF/pb9aeoLgzPdOC2OMFs8oKAEkTQa+X58mFXhtfcrWPKaikcze4UBjTWoyhPF8/n24OSqE0AuA5+Q65PL9EjztOQpcvq9i5M3cKHDfdrKtrh+Ff3FGSAifExoylZWN8YIg03le75khXXElz3oIhOQf8Itrzxy79bUCkTEW5kpjYaC0ezRLA9RR17TOBlB+NuiKn5VsSRvJ+UTaK3J5T9+t13iVTqe+DduPfOynGmC2e98YEW0OaqkpUtPJSblWlOxy/MqdwbBF+qluYdx88/QWRMwmkp2r5xPT0J0WNv4Ec6upahNZh+JlsryZs2aeJCT6XA9QkNYnMHVX704N1J13X1g3E5MpKXAXU7Dyd3q8PRCToz+hh+2+JCwTzvdVQ9g+5TZdFDOYVzPI9Y07GSE5io31GgF9HvCncbHDS+fJEwm0ihQekiG8bFzv+n5hE+011cKAvRg3V50TlN+2pdaVEv/+fqVQzdiU0ggIPx5aYWOKgf36u9hk1IgB6Wh1vx0OK1IZtd2TR4k+M84HClkrfjkxemPVlmfyRW1IefrRQeiZW7Rsqn+Ie6/4/ggcD1qHAPT8OCmGi+oi+q3/n/buASk=
-  file: dist/synthstick\ Setup\ 1.0.0.exe
+  file: dist\synthstick Setup 1.0.0.exe
   skip_cleanup: true
   on:
     tags: true
