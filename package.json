@@ -1,0 +1,22 @@
+{
+  "name": "synthstick",
+  "description": "a joystick controlled synth",
+  "author": "Daniel Esteban Nombela",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "electron-webpack",
+    "package": "npm run build && electron-builder",
+    "start": "electron-webpack dev"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.19"
+  },
+  "devDependencies": {
+    "electron": "^10.1.2",
+    "electron-builder": "^22.8.0",
+    "electron-webpack": "^2.8.2",
+    "webpack": "^4.44.1"
+  }
+}
