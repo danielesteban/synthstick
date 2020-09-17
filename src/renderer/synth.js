@@ -41,7 +41,6 @@ class Synth {
       label.style.padding = '0 0.25rem';
       label.style.marginRight = '0.25rem';
       label.style.border = '1px solid #000';
-      label.innerText = id;
       control.appendChild(label);
       const bar = document.createElement('span');
       bar.style.position = 'absolute';
@@ -49,9 +48,12 @@ class Synth {
       bar.style.left = '0px';
       bar.style.width = '0%';
       bar.style.height = '100%';
-      bar.style.zIndex = '-1';
       bar.style.background = '#393';
       label.appendChild(bar);
+      const text = document.createElement('span');
+      text.style.position = 'relative';
+      text.innerText = id;
+      label.appendChild(text);
       const state = {
         bar,
         mapping: localStorage.getItem(`synthstick:mapping:${id}`) || undefined,

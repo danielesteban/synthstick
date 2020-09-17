@@ -1,19 +1,35 @@
-language: node_js
-node_js: lts/*
-os:
-- linux
-- windows
-script:
-- npm run package
-deploy:
-  provider: releases
-  api_key:
-    secure: q5Qx7VA2lkPj7WrwDpqfvsvItCiS6CUdhHWPA9Tt3D9cIRW9WgpcSVyoCg3RUXcH9r5Kz/Pr0H6ImAq4eIF/pb9aeoLgzPdOC2OMFs8oKAEkTQa+X58mFXhtfcrWPKaikcze4UBjTWoyhPF8/n24OSqE0AuA5+Q65PL9EjztOQpcvq9i5M3cKHDfdrKtrh+Ff3FGSAifExoylZWN8YIg03le75khXXElz3oIhOQf8Itrzxy79bUCkTEW5kpjYaC0ezRLA9RR17TOBlB+NuiKn5VsSRvJ+UTaK3J5T9+t13iVTqe+DduPfOynGmC2e98YEW0OaqkpUtPJSblWlOxy/MqdwbBF+qluYdx88/QWRMwmkp2r5xPT0J0WNv4Ec6upahNZh+JlsryZs2aeJCT6XA9QkNYnMHVX704N1J13X1g3E5MpKXAXU7Dyd3q8PRCToz+hh+2+JCwTzvdVQ9g+5TZdFDOYVzPI9Y07GSE5io31GgF9HvCncbHDS+fJEwm0ihQekiG8bFzv+n5hE+011cKAvRg3V50TlN+2pdaVEv/+fqVQzdiU0ggIPx5aYWOKgf36u9hk1IgB6Wh1vx0OK1IZtd2TR4k+M84HClkrfjkxemPVlmfyRW1IefrRQeiZW7Rsqn+Ie6/4/ggcD1qHAPT8OCmGi+oi+q3/n/buASk=
-  file_glob: true
-  file:
-  - dist/*.AppImage
-  - dist/*.exe
-  - dist/*.snap
-  skip_cleanup: true
-  on:
-    tags: true
+matrix:
+  include:
+  - name: Desktop
+    language: node_js
+    node_js: lts/*
+    os:
+    - linux
+    - windows
+    script:
+    - npm run package
+    deploy:
+      provider: releases
+      api_key:
+        secure: q5Qx7VA2lkPj7WrwDpqfvsvItCiS6CUdhHWPA9Tt3D9cIRW9WgpcSVyoCg3RUXcH9r5Kz/Pr0H6ImAq4eIF/pb9aeoLgzPdOC2OMFs8oKAEkTQa+X58mFXhtfcrWPKaikcze4UBjTWoyhPF8/n24OSqE0AuA5+Q65PL9EjztOQpcvq9i5M3cKHDfdrKtrh+Ff3FGSAifExoylZWN8YIg03le75khXXElz3oIhOQf8Itrzxy79bUCkTEW5kpjYaC0ezRLA9RR17TOBlB+NuiKn5VsSRvJ+UTaK3J5T9+t13iVTqe+DduPfOynGmC2e98YEW0OaqkpUtPJSblWlOxy/MqdwbBF+qluYdx88/QWRMwmkp2r5xPT0J0WNv4Ec6upahNZh+JlsryZs2aeJCT6XA9QkNYnMHVX704N1J13X1g3E5MpKXAXU7Dyd3q8PRCToz+hh+2+JCwTzvdVQ9g+5TZdFDOYVzPI9Y07GSE5io31GgF9HvCncbHDS+fJEwm0ihQekiG8bFzv+n5hE+011cKAvRg3V50TlN+2pdaVEv/+fqVQzdiU0ggIPx5aYWOKgf36u9hk1IgB6Wh1vx0OK1IZtd2TR4k+M84HClkrfjkxemPVlmfyRW1IefrRQeiZW7Rsqn+Ie6/4/ggcD1qHAPT8OCmGi+oi+q3/n/buASk=
+      file_glob: true
+      file:
+      - dist/*.AppImage
+      - dist/*.exe
+      - dist/*.snap
+      skip_cleanup: true
+      on:
+        tags: true
+  - name: Web
+    language: node_js
+    node_js: lts/*
+    env:
+    - secure: YMUnzuniVTEjwMpsS28t9AW/gzdQzjHB5bVTEb3WudcKVU+W3d7Risr48p0+vwWz7VBCrXLkpf9c0Y3jovbW3cZPErbl231mzaTz9MBmpT5+I8JiCGvJwtcqEl3D7eHSjTrhNDbBE3YynSf+zhHKpZlgfJPFq5UGR5TyQMSl9otv5wQpT2HZ56Tn2R8ZOh4Q6ED5AYLOexE1wSPagm7qsabAarB4iNxVNrqewrfhpMApE7jMh4c7hP0lSM+aeNlVSHIN5nPubBjUB1uebhrmBOcu67dRl5ccFOvIQwXsncJinZH3aorr6WYOUf9DVk8Tg4a1TbSPHNyG5RU/1x9+cf+PNS2U8MLcDL44Jxxsny6om7xP0pkSw8EfVuMJAFknCFKfhj1Usddht4bSR7l75pxVozgt1o8ewRGUWQpHC/1GRtTW78BQ3uNbuVLfsXLar/P83Ansq4dneVKTFm1K6jSFFBgTCFeGbKq0RjJobWToe2NQ6QgVtA/hezBeXavUXkY4LcW1h/LilueX/BYFFOL5aQAoK5VLkqjDrodPzywwWMjXBzuDDHgEdtUL8gVXPGGKNM1hPg1oLkcFIbS+odnWJMoWcd1i/fC41vrpsKvVmc/kUE7zlDFmJLBzWyDQltOm7lLkBr+2tEkmfeAsAzO94ZzdIhFBNCutoXmfvxE=
+    script:
+    - npm run build:web
+    deploy:
+      provider: script
+      script: npm --prefix client run deploy -- -r https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+      skip_cleanup: true
+      on:
+        tags: true

@@ -7,14 +7,12 @@ import Mixer from './mixer';
 import Synth from './synth';
 import Visualizer from './visualizer';
 
-document.body.style.background = 'linear-gradient(#333, #151515)';
-document.body.style.color = '#eee';
-document.body.style.fontFamily = 'sans-serif';
-document.body.style.fontSize = '0.8rem';
-document.body.style.height = '100vh';
-document.body.style.margin = '0';
-
 const context = new AudioContext();
+window.addEventListener('mousedown', () => {
+  if (context.state !== 'running') {
+    context.resume();
+  }
+});
 const output = new Channel({
   context,
   filters: [{ type: 'analyser' }],
@@ -22,7 +20,12 @@ const output = new Channel({
 });
 output.output.connect(context.destination);
 
+document.body.style.margin = '0';
 const dom = document.getElementById('app');
+dom.style.background = 'linear-gradient(#333, #151515)';
+dom.style.color = '#eee';
+dom.style.fontFamily = 'sans-serif';
+dom.style.fontSize = '0.8rem';
 
 const gamepads = new Gamepads();
 const visualizer = new Visualizer({ analyser: output.filters[0], dom });

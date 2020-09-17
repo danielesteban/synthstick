@@ -34,7 +34,7 @@ app.on('ready', () => {
     `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
   ));
   interval = setInterval(() => win.send('clock', new Date() / 1000), 1000 / 60);
-  // !production && win.toggleDevTools();
+  !production && win.toggleDevTools();
 });
 
 app.on('window-all-closed', () => {

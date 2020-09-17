@@ -6,8 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "electron-webpack",
-    "package": "npm run build && electron-builder -p never",
+    "build:desktop": "electron-webpack",
+    "build:web": "webpack --config web/webpack.config.js",
+    "deploy": "gh-pages -d web/dist -u \"Travis CI <travis@travis-ci.org>\"",
+    "package": "npm run build:desktop && electron-builder -p never",
     "start": "electron-webpack dev"
   },
   "dependencies": {
@@ -17,6 +19,7 @@
     "electron": "^10.1.2",
     "electron-builder": "^22.8.0",
     "electron-webpack": "^2.8.2",
+    "gh-pages": "^3.1.0",
     "webpack": "^4.44.1"
   }
 }
