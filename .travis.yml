@@ -29,7 +29,7 @@ matrix:
     - npm run build:web
     deploy:
       provider: script
-      script: npm --prefix client run deploy -- -r https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+      script: npm run deploy -- -r https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
       skip_cleanup: true
       on:
         tags: true
