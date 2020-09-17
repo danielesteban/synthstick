@@ -4,9 +4,8 @@ matrix:
     language: node_js
     node_js: lts/*
     include:
-      os:
-      - linux
-      - windows
+    - os: linux
+    - os: windows
     script:
     - npm run package
     deploy:
