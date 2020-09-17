@@ -26,6 +26,12 @@ dom.style.background = 'linear-gradient(#333, #151515)';
 dom.style.color = '#eee';
 dom.style.fontFamily = 'sans-serif';
 dom.style.fontSize = '0.8rem';
+if (!dom.style.width) {
+  dom.style.width = '100vw';
+}
+if (!dom.style.height) {
+  dom.style.height = '100vh';
+}
 
 const gamepads = new Gamepads();
 const visualizer = new Visualizer({ analyser: output.filters[0], dom });

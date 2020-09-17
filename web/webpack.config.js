@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const GHPagesSPAWebpackPlugin = require('ghpages-spa-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -18,14 +17,11 @@ module.exports = {
     },
   },
   devtool: false,
-  optimization: {
-    minimizer: [new TerserPlugin()],
-  },
   performance: { hints: false },
   stats: { children: false, entrypoints: false, modules: false },
   plugins: [
     new HtmlWebpackPlugin({
-      minify: { collapseWhitespace: true },
+      minify: { collapseWhitespace: false },
       template: path.join(__dirname, 'index.ejs'),
     }),
     new GHPagesSPAWebpackPlugin({

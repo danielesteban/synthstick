@@ -1,9 +1,10 @@
 class Visualizer {
   constructor({ analyser, dom }) {
     this.analyser = analyser;
+    const rect = dom.getBoundingClientRect();
     const canvas = document.createElement('canvas');
-    canvas.width = 250;
-    canvas.height = 92;
+    canvas.width = rect.width;
+    canvas.height = rect.height - 279;
     canvas.style.verticalAlign = 'middle';
     dom.appendChild(canvas);
     this.canvas = canvas;
