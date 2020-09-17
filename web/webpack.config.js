@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const GHPagesSPAWebpackPlugin = require('ghpages-spa-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
@@ -26,6 +27,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       minify: { collapseWhitespace: true },
       template: path.join(__dirname, 'index.ejs'),
+    }),
+    new GHPagesSPAWebpackPlugin({
+      domain: 'synthstick.gatunes.com',
     }),
   ],
 };
