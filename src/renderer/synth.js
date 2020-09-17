@@ -99,10 +99,15 @@ class Synth {
         map.style.background = '#393';
         gamepads.prependOnceListener('change', ({ type, gamepad, index }) => {
           map.style.background = '#222';
-          if (state.mapping && this.mappings.get(state.mapping) === id) {
+          if (state.mapping) {
             this.mappings.delete(state.mapping);
           }
           state.mapping = `${type}:${gamepad}:${index}`;
+          const current = this.mappings.get(state.mapping);
+          if (current) {
+            localStorage.removeItem(`synthstick:mapping:${current}`);
+            this.controls[current].mapping = undefined;
+          }
           this.mappings.set(state.mapping, id);
           localStorage.setItem(`synthstick:mapping:${id}`, state.mapping);
         });
