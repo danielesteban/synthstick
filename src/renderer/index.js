@@ -7,7 +7,7 @@ import Mixer from './mixer';
 import Synth from './synth';
 import Visualizer from './visualizer';
 
-document.body.style.background = 'radial-gradient(#222, #111 150%)';
+document.body.style.background = 'linear-gradient(#333, #151515)';
 document.body.style.color = '#eee';
 document.body.style.fontFamily = 'sans-serif';
 document.body.style.fontSize = '0.8rem';

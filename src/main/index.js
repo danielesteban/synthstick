@@ -13,7 +13,7 @@ app.on('ready', () => {
   win = new BrowserWindow({
     title: 'SynthStick',
     width: 256,
-    height: 300,
+    height: 400,
     maximizable: false,
     minimizable: false,
     resizable: false,

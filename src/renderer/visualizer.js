@@ -2,9 +2,9 @@ class Visualizer {
   constructor({ analyser, dom }) {
     this.analyser = analyser;
     const canvas = document.createElement('canvas');
-    canvas.style.marginBottom = '0.25rem';
     canvas.width = 250;
-    canvas.height = 90;
+    canvas.height = 92;
+    canvas.style.verticalAlign = 'middle';
     dom.appendChild(canvas);
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');

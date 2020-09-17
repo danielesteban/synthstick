@@ -3,20 +3,8 @@ class Voice {
     this.context = context;
     this.output = context.createGain();
     this.output.gain.setValueAtTime(1, context.currentTime);
-
-    this.oscillators = waves.map(({ type, offset }) => {
-      const gain = context.createGain();
-      gain.gain.setValueAtTime((1 / waves.length) * 0.5, context.currentTime);
-      gain.connect(this.output);
-      const oscillator = context.createOscillator();
-      oscillator.offset = offset;
-      oscillator.type = type;
-      oscillator.connect(gain);
-      oscillator.start(context.currentTime);
-      return oscillator;
-    });
-
-    this.note = 0;
+    this.waves = waves;
+    this.updateWaves();
   }
 
   get note() {
@@ -24,15 +12,46 @@ class Voice {
   }
 
   set note(value) {
-    const { context, oscillators } = this;
     if (this._note === value) {
       return;
     }
     this._note = value;
+    this.updateFrequencies();
+  }
+
+  updateWaves() {
+    const { context, oscillators, output, waves } = this;
+    if (oscillators) {
+      oscillators.forEach((oscillator) => {
+        oscillator.output.disconnect(output);
+        oscillator.disconnect(oscillator.output);
+        oscillator.stop(context.currentTime);
+      });
+    }
+    const enabled = waves.filter(({ enabled }) => !!enabled);
+    this.oscillators = enabled.map(({ type, offset }) => {
+      const gain = context.createGain();
+      gain.gain.setValueAtTime((1 / enabled.length) * 0.5, context.currentTime);
+      gain.connect(output);
+      const oscillator = context.createOscillator();
+      oscillator.offset = offset;
+      oscillator.type = type;
+      oscillator.output = gain;
+      oscillator.connect(gain);
+      oscillator.start(context.currentTime);
+      return oscillator;
+    });
+    if (this.note !== undefined) {
+      this.updateFrequencies();
+    }
+  }
+
+  updateFrequencies() {
+    const { context, note, oscillators } = this;
     oscillators.forEach(({ frequency, offset }) => {
       frequency.cancelScheduledValues(0);
       frequency.exponentialRampToValueAtTime(
-        Voice.frequencies[value + offset],
+        Voice.frequencies[note + offset],
         context.currentTime + 0.01
       );
     });

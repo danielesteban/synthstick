@@ -5,7 +5,6 @@ class Mixer {
   constructor({ dom, output }) {
     const mixer = document.createElement('div');
     mixer.style.background = '#000';
-    mixer.style.borderTop = '1px solid #222';
     mixer.style.display = 'flex';
     mixer.style.padding = '0.25rem';
     dom.appendChild(mixer);
