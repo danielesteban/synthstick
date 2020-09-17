@@ -3,9 +3,10 @@ matrix:
   - name: Desktop
     language: node_js
     node_js: lts/*
-    os:
-    - linux
-    - windows
+    include:
+      os:
+      - linux
+      - windows
     script:
     - npm run package
     deploy:
