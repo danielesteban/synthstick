@@ -1,3 +1,4 @@
+if: tag IS present
 matrix:
   include:
   - name: Linux
@@ -15,8 +16,6 @@ matrix:
       - dist/*.AppImage
       - dist/*.snap
       skip_cleanup: true
-      on:
-        tags: true
   - name: Mac
     language: node_js
     node_js: lts/*
@@ -31,8 +30,6 @@ matrix:
       file:
       - dist/*.dmg
       skip_cleanup: true
-      on:
-        tags: true
   - name: Windows
     language: node_js
     node_js: lts/*
@@ -59,5 +56,3 @@ matrix:
       provider: script
       script: npm run deploy -- -r https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
       skip_cleanup: true
-      on:
-        tags: true
