@@ -95,22 +95,31 @@ class Synth {
       map.style.fontSize = '0.8em';
       map.style.outline = 'none';
       map.innerText = 'MAP';
+      const onGamepad = ({ type, gamepad, index }) => {
+        state.isMapping = false;
+        map.style.background = '#222';
+        if (state.mapping) {
+          this.mappings.delete(state.mapping);
+        }
+        state.mapping = `${type}:${gamepad}:${index}`;
+        const current = this.mappings.get(state.mapping);
+        if (current) {
+          localStorage.removeItem(`synthstick:mapping:${current}`);
+          this.controls[current].mapping = undefined;
+        }
+        this.mappings.set(state.mapping, id);
+        localStorage.setItem(`synthstick:mapping:${id}`, state.mapping);
+      };
       map.addEventListener('click', () => {
-        map.style.background = '#393';
-        gamepads.prependOnceListener('change', ({ type, gamepad, index }) => {
+        if (state.isMapping) {
+          state.isMapping = false;
           map.style.background = '#222';
-          if (state.mapping) {
-            this.mappings.delete(state.mapping);
-          }
-          state.mapping = `${type}:${gamepad}:${index}`;
-          const current = this.mappings.get(state.mapping);
-          if (current) {
-            localStorage.removeItem(`synthstick:mapping:${current}`);
-            this.controls[current].mapping = undefined;
-          }
-          this.mappings.set(state.mapping, id);
-          localStorage.setItem(`synthstick:mapping:${id}`, state.mapping);
-        });
+          gamepads.off('change', onGamepad);
+          return;
+        }
+        state.isMapping = true;
+        map.style.background = '#393';
+        gamepads.prependOnceListener('change', onGamepad);
       });
       control.appendChild(map);
       controls.appendChild(control);
